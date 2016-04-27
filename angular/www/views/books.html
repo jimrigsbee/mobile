@@ -1,0 +1,30 @@
+<fhheader title="Book Inventory" subtext="MP222"></fhheader>
+
+<section id="inventory">
+    <div id="formWrapper" ng-init="getList()">
+        <p id="description">Here is the book inventory.</p>
+        <br/>
+        <div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Author</th>
+                <th>On Hand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="book in booklist">
+                <td>{{book.title}}</td>
+                <td>{{book.genre}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.count}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+</section>
+
+<fhfooter version="1.0.0"></fhfooter>
