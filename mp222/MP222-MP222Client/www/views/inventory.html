@@ -1,0 +1,64 @@
+<fhheader title="Book Inventory" subtext="MP222"></fhheader>
+
+<section id="inventory">
+    <div id="formWrapper">
+        <form name="bookForm" class="form-horizontal" novalidate>
+          <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="controls col-sm-10">
+              <p id="description">Please provide the information for the book inventory.</p>
+            </div>
+          </div>
+          <div class="form-group">
+              <label class="control-label col-sm-2" for="inputBarcode">Barcode</label>
+              <div class="controls col-sm-10">
+                  <input name="inputBarcode" type="text" class="form-control" ng-model="inputBarcode" ng-blur="lookupCode(inputBarcode)" placeholder="Enter UPC (optional).">
+                  <button type="button" class="btn btn-primary btn-block" ng-click="scanCode()">Scan UPC</button>
+              </div>
+          </div>
+            <div class="form-group" ng-class="{ 'has-error' : bookForm.inputTitle.$invalid && !bookForm.inputTitle.$pristine }">
+                <label class="control-label col-sm-2" for="inputTitle">Book Title</label>
+                <div class="controls col-sm-10">
+                    <input name="inputTitle" type="text" class="form-control" ng-model="inputTitle" placeholder="Enter a book title." required>
+                     <p ng-show="bookForm.inputTitle.$invalid" class="help-block">Book title is required.</p>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="inputGenre">Genre</label>
+              <div class="controls col-sm-10">
+                <select name="inputGenre" class="form-control" ng-model="inputGenre" ng-options="l.name for l in genres" required></select>
+                <p ng-show="bookForm.inputGenre.$invalid" class="help-block">Genre is required.</p>
+              </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : bookForm.inputAuthor.$invalid && !bookForm.inputAuthor.$pristine }">
+                <label class="control-label col-sm-2" for="inputAuthor">Author</label>
+                <div class="controls col-sm-10">
+                    <input name="inputAuthor" type="text" class="form-control" ng-model="inputAuthor" placeholder="Enter the author's name." required>
+                    <p ng-show="bookForm.inputAuthor.$invalid" class="help-block">Author is required.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="inputDesc">Description</label>
+                <div class="controls col-sm-10">
+                    <textarea rows="3" class="form-control" ng-model="inputDesc" placeholder="Enter a description of the book."></textarea>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : bookForm.inputCount.$invalid && !bookForm.inputCount.$pristine }">
+                <label class="control-label col-sm-2" for="inputCount">Inventory Count</label>
+                <div class="controls col-sm-10">
+                    <input name="inputCount" type="number" class="form-control" ng-model="inputCount" placeholder="Enter inventory count." required>
+                    <p ng-show="bookForm.inputCount.$invalid" class="help-block">Count is required.</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2"></div>
+                <div class="controls col-sm-10">
+                    <button type="button" class="btn btn-primary btn-block" ng-disabled="bookForm.$invalid" ng-click="submitInventory()">Submit Inventory Record</button>
+                    <button type="button" class="btn btn-primary btn-block" ng-click="showList()">See Inventory</button>
+                </div>
+            </div>
+        </form>
+        <div ng-show="noticeMessage" class="text-center tx-result {{textClassName}}"><p>{{noticeMessage}}</p></div>
+        <div ng-show="image"><img src="{{image}}"></div>
+    </div>
+</section>
